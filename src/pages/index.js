@@ -1,21 +1,51 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, StaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
+import BlogItem from "../components/blogItem"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
+const IndexPage = props => {
+  const { data } = props
+
+  const { edges: posts } = data.allMarkdownRemark
+  return (
+    <Layout>
+      <SEO title="Blog" />
+      <h1>Topic-Match Blog</h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+        }}
+      >
+        {posts &&
+          posts.map(({ node: post }) => (
+            <BlogItem
+              key={post.id}
+              post={post.frontmatter}
+              image={post.frontmatter.image.childImageSharp.fluid.src}
+              style={{ marginRight: 10, width: "50%" }}
+              slug={post.fields.slug}
+              date={[post.frontmatter.date]}
+            ></BlogItem>
+          ))}
+      </div>
+    </Layout>
+  )
+}
+
+export default () => (
+  <StaticQuery
+    query={graphql`
+      query BlogPageQuery {
+        allMarkdownRemark(
+          sort: { order: DESC, fields: [frontmatter__date] }
+          filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
+        )
+      }
+    `}
+  ></StaticQuery>
 )
-
-export default IndexPage
