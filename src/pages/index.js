@@ -44,8 +44,31 @@ export default () => (
         allMarkdownRemark(
           sort: { order: DESC, fields: [frontmatter__date] }
           filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
-        )
+        ) {
+          edges {
+            node {
+              excerpt(pruneLength: 40)
+              id
+              fields {
+                slug
+              }
+              frontmatter {
+                title
+                templateKey
+                date(formatString: "MMMM DD, YYYY")
+                image {
+                  childImageSharp {
+                    fluid(maxWidth: 1400, quality: 100) {
+                      ...GatsbyImageSharpFluid
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     `}
-  ></StaticQuery>
+    render={data => <IndexPage data={data} />}
+  />
 )
