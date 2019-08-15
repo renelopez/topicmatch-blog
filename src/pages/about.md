@@ -1,6 +1,7 @@
 ---
-templateKey: about-page
 title: About Page testing (created with gatsby-node.js)
+date: 2019-08-15T20:05:26.850Z
+description: A description was required in here
 ---
 
 (This text is obnoxiously red on purpose)
