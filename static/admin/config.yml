@@ -8,17 +8,33 @@ public_folder: /images
 collections:
   - name: "blog"
     label: "Blog"
-    folder: src/pages
+    folder: "src/pages/blog"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {
           label: "Template key",
-          name: "template key",
+          name: "templateKey",
           widget: "hidden",
-          default: "single-blog",
+          default: "blog-post",
         }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - file: "src/pages/about.md"
+        label: "About"
+        name: "about"
+        fields:
+          - {
+              label: "Template key",
+              name: "templateKey",
+              widget: "hidden",
+              default: about-page,
+            }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
