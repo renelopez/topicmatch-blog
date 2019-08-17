@@ -33,9 +33,7 @@ const BlogPage = ({ data, classes }) => {
         </Link>
 
         <Grid container spacing={24}>
-          <Grid item xs={3}>
-            <Img fluid={post.frontmatter.image.childImageSharp.fluid} />
-          </Grid>
+          <Grid item xs={3}></Grid>
           <Grid item xs={9}>
             <h1 className={classes.title}>{post.frontmatter.title}</h1>
             <h4>{post.frontmatter.date}</h4>
@@ -56,13 +54,6 @@ export const BlogPageQuery = graphql`
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
-        image {
-          childImageSharp {
-            fluid(maxWidth: 500, quality: 100) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
       }
     }
   }

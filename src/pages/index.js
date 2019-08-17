@@ -26,7 +26,6 @@ const IndexPage = props => {
             <BlogItem
               key={post.id}
               post={post.frontmatter}
-              image={post.frontmatter.image.childImageSharp.fluid.src}
               style={{ marginRight: 10, width: "50%" }}
               slug={post.fields.slug}
               date={[post.frontmatter.date]}
@@ -42,7 +41,7 @@ export default () => (
     query={graphql`
       query BlogPageQuery {
         allMarkdownRemark(
-          sort: { order: DESC, fields: [frontmatter__date] }
+          sort: { order: DESC, fields: [frontmatter___date] }
           filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
         ) {
           edges {
