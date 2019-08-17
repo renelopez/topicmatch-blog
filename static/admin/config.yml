@@ -13,7 +13,7 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {
-          label: "Template key",
+          label: "Template Key",
           name: "templateKey",
           widget: "hidden",
           default: "blog-post",
